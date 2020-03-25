@@ -1,6 +1,5 @@
 # coursera_cpp
 
-Об этом курсе
 Основы разработки на C++
 [*Специализация Искусство разработки на современном C++*](https://www.coursera.org/specializations/c-plus-plus-modern-development/)
 
