@@ -31,7 +31,7 @@
 Пример
 ------
 
--Ввод
+### Ввод
 
 ```console
 10
@@ -46,7 +46,7 @@ NEW_BUS 272 4 Vnukovo Moskovsky Rumyantsevo Troparyovo
 STOPS_FOR_BUS 272
 ALL_BUSES
 ```
--Вывод
+### Вывод
 
 ```console
 No buses
