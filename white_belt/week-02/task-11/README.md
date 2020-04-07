@@ -20,7 +20,7 @@
 Пример
 -------------
 
--Ввод
+### Ввод
 
 ```console
 3
@@ -29,7 +29,7 @@ find search
 master stream
 ```
 
--Вывод
+### Вывод
 
 ```console
 YES
