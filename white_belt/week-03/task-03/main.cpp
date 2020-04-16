@@ -5,31 +5,29 @@
 
 using namespace std;
 
-string transform(string& str) {
-  string result = "";
-  for (char i : str) {
-      result += tolower(i);
+class SortedStrings {
+public:
+  void AddString(const string& s) {
+    data.push_back(s);
   }
-  return result;
-}
-
-bool myfunction(string i, string j) {
-  return transform(i) < transform(j);
-}
+  vector<string> GetSortedStrings() {
+    sort(begin(data), end(data));
+    return data;
+  }
+private:
+  vector<string> data;
+};
 
 int main(){
-  int n;
-  cin >> n;
+  SortedStrings strings;
+  
+  strings.AddString("first");
+  strings.AddString("third");
+  strings.AddString("second");
+  strings.GetSortedStrings();
+  
+  strings.AddString("second");
+  strings.GetSortedStrings();
 
-  vector<string> v(n);
-
-  for (string& s : v) {
-      cin >> s;
-  }
-  sort(v.begin(), v.end(), myfunction);
-
-  for (string x : v) {
-    cout << x << " ";
-  }
   return 0;
 }

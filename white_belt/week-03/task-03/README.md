@@ -14,9 +14,9 @@ private:
 };
 
 ```
-### Пример
+## Пример
 
-## Код
+### Код
 
 ```console
 void PrintSortedStrings(SortedStrings& strings) {
@@ -42,7 +42,7 @@ int main() {
 
 ```
 
-## Вывод
+### Вывод
 
 ```console
 first second third
