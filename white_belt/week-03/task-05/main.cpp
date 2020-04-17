@@ -29,6 +29,9 @@ public:
       }
       return full_name;
   }
+  string GetFullNameWithHistory(int year) {
+    // получить все имена и фамилии по состоянию на конец года year
+  }
 private:
     string GetFirstName(int year, map<int, string>& firstname) {
         while (firstname.count(year) == 0 && year > 0) {
@@ -47,24 +50,15 @@ private:
     map<int, string> lastname;
 };
 
-int main(){
+int main() {
   Person person;
-  
-  person.ChangeFirstName(1965, "Polina");
-  person.ChangeLastName(1967, "Sergeeva");
-  for (int year : {1900, 1965, 1990}) {
-    cout << person.GetFullName(year) << endl;
-  }
-  
-  person.ChangeFirstName(1970, "Appolinaria");
-  for (int year : {1969, 1970}) {
-    cout << person.GetFullName(year) << endl;
-  }
-  
-  person.ChangeLastName(1968, "Volkova");
-  for (int year : {1969, 1970}) {
-    cout << person.GetFullName(year) << endl;
-  }
+
+  person.ChangeFirstName(1900, "Eugene");
+  person.ChangeLastName(1900, "Sokolov");
+  person.ChangeLastName(1910, "Sokolov");
+  person.ChangeFirstName(1920, "Evgeny");
+  person.ChangeLastName(1930, "Sokolov");
+  cout << person.GetFullNameWithHistory(1940) << endl;
   
   return 0;
 }
