@@ -19,17 +19,38 @@ private:
   // приватные поля
 };
 ```
-Считайте, что в каждый год может произойти не более одного изменения фамилии и не более одного изменения имени. При этом с течением времени могут открываться всё новые факты из прошлого человека, поэтому года́ в последовательных вызовах методов ChangeLastName и ChangeFirstName не обязаны возрастать.
+В отличие от метода GetFullName, метод GetFullNameWithHistory должен вернуть не только последние имя и фамилию к концу данного года, но ещё и все предыдущие имена и фамилии в обратном хронологическом порядке. Если текущие факты говорят о том, что человек два раза подряд изменил фамилию или имя на одно и то же, второе изменение при формировании истории нужно игнорировать.
 
-Гарантируется, что все имена и фамилии непусты.
+Для лучшего понимания формата см. примеры.
 
-Строка, возвращаемая методом GetFullName, должна содержать разделённые одним пробелом имя и фамилию человека по состоянию на конец данного года.
+## Пример 1
 
--   Если к данному году не случилось ни одного изменения фамилии и имени, верните строку "Incognito".
--   Если к данному году случилось изменение фамилии, но не было ни одного изменения имени, верните "*last_name* with unknown first name".
--   Если к данному году случилось изменение имени, но не было ни одного изменения фамилии, верните "*first_name* with unknown last name"
+### Код
 
-## Пример
+```cpp
+int main() {
+  Person person;
+
+  person.ChangeFirstName(1900, "Eugene");
+  person.ChangeLastName(1900, "Sokolov");
+  person.ChangeLastName(1910, "Sokolov");
+  person.ChangeFirstName(1920, "Evgeny");
+  person.ChangeLastName(1930, "Sokolov");
+  cout << person.GetFullNameWithHistory(1940) << endl;
+  
+  return 0;
+}
+
+```
+
+### Вывод
+
+```console
+Evgeny (Eugene) Sokolov
+
+```
+
+## Пример 2
 
 ### Код
 
@@ -40,18 +61,33 @@ int main() {
   person.ChangeFirstName(1965, "Polina");
   person.ChangeLastName(1967, "Sergeeva");
   for (int year : {1900, 1965, 1990}) {
-    cout << person.GetFullName(year) << endl;
+    cout << person.GetFullNameWithHistory(year) << endl;
   }
   
   person.ChangeFirstName(1970, "Appolinaria");
   for (int year : {1969, 1970}) {
-    cout << person.GetFullName(year) << endl;
+    cout << person.GetFullNameWithHistory(year) << endl;
   }
   
   person.ChangeLastName(1968, "Volkova");
   for (int year : {1969, 1970}) {
-    cout << person.GetFullName(year) << endl;
+    cout << person.GetFullNameWithHistory(year) << endl;
   }
+  
+  person.ChangeFirstName(1990, "Polina");
+  person.ChangeLastName(1990, "Volkova-Sergeeva");
+  cout << person.GetFullNameWithHistory(1990) << endl;
+  
+  person.ChangeFirstName(1966, "Pauline");
+  cout << person.GetFullNameWithHistory(1966) << endl;
+  
+  person.ChangeLastName(1960, "Sergeeva");
+  for (int year : {1960, 1967}) {
+    cout << person.GetFullNameWithHistory(year) << endl;
+  }
+  
+  person.ChangeLastName(1961, "Ivanova");
+  cout << person.GetFullNameWithHistory(1967) << endl;
   
   return 0;
 }
@@ -64,8 +100,43 @@ Incognito
 Polina with unknown last name
 Polina Sergeeva
 Polina Sergeeva
-Appolinaria Sergeeva
-Polina Volkova
-Appolinaria Volkova
+Appolinaria (Polina) Sergeeva
+Polina Volkova (Sergeeva)
+Appolinaria (Polina) Volkova (Sergeeva)
+Polina (Appolinaria, Polina) Volkova-Sergeeva (Volkova, Sergeeva)
+Pauline (Polina) with unknown last name
+Sergeeva with unknown first name
+Pauline (Polina) Sergeeva
+Pauline (Polina) Sergeeva (Ivanova, Sergeeva)
 ```
 
+## Пример 3
+
+### Код
+
+```cpp
+int main() {
+  Person person;
+
+  person.ChangeFirstName(1965, "Polina");
+  person.ChangeFirstName(1965, "Appolinaria");
+
+  person.ChangeLastName(1965, "Sergeeva");
+  person.ChangeLastName(1965, "Volkova");
+  person.ChangeLastName(1965, "Volkova-Sergeeva");
+
+  for (int year : {1964, 1965, 1966}) {
+    cout << person.GetFullNameWithHistory(year) << endl;
+  }
+
+  return 0;
+}
+```
+
+### Вывод
+
+```console
+Incognito
+Appolinaria Volkova-Sergeeva
+Appolinaria Volkova-Sergeeva
+```
