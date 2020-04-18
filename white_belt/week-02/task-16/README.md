@@ -11,7 +11,7 @@ set<string> BuildMapValuesSet(const map<int, string>& m) {
 
 ### Код 
 
-```console
+```cpp
 set<string> values = BuildMapValuesSet({
     {1, "odd"},
     {2, "even"},

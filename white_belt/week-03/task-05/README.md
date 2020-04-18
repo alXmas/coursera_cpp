@@ -1,6 +1,6 @@
 Дополните класс из предыдущей задачи «Имена и фамилии — 1» методом GetFullNameWithHistory:
 
-```console
+```cpp
 class Person {
 public:
   void ChangeFirstName(int year, const string& first_name) {
@@ -12,10 +12,12 @@ public:
   string GetFullName(int year) {
     // получить имя и фамилию по состоянию на конец года year
   }
+  string GetFullNameWithHistory(int year) {
+    // получить все имена и фамилии по состоянию на конец года year
+  }
 private:
   // приватные поля
 };
-
 ```
 Считайте, что в каждый год может произойти не более одного изменения фамилии и не более одного изменения имени. При этом с течением времени могут открываться всё новые факты из прошлого человека, поэтому года́ в последовательных вызовах методов ChangeLastName и ChangeFirstName не обязаны возрастать.
 
@@ -31,7 +33,7 @@ private:
 
 ### Код
 
-```console
+```cpp
 int main() {
   Person person;
   

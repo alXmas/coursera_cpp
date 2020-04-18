@@ -2,7 +2,7 @@
 
 Пример
 
-```console
+```cpp
 int a = 4;
 int b = 2;
 UpdateIfGreater(a, b);

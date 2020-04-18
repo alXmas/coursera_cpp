@@ -1,6 +1,6 @@
 Реализуйте класс для человека, поддерживающий историю изменений человеком своих фамилии и имени.
 
-```console
+```cpp
 class Person {
 public:
   void ChangeFirstName(int year, const string& first_name) {
@@ -31,7 +31,7 @@ private:
 
 ### Код
 
-```console
+```cpp
 int main() {
   Person person;
   
